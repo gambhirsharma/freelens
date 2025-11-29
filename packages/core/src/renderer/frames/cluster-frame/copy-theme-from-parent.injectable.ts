@@ -10,17 +10,15 @@ import applyLensThemeInjectable from "../../themes/apply-lens-theme.injectable";
 
 /**
  * Ensures cluster frames preserve theme CSS variables by:
- * 1. Storing the last received theme in a module variable
+ * 1. Storing the last received theme in a global variable
  * 2. Reapplying it when the document is ready
- * 3. Watching for document changes that might clear CSS variables
+ * 3. Watching for potential CSS variable resets with delayed reapplication
  */
 const ensureThemeReadyInjectable = getInjectable({
   id: "ensure-theme-ready-in-cluster-frame",
   instantiate: (di) => ({
     run: () => {
       const applyLensTheme = di.inject(applyLensThemeInjectable);
-
-      console.log('[THEME] Cluster frame initializing theme persistence');
 
       // Store the last received theme globally in the iframe
       // This will be set by the update listener
@@ -30,34 +28,23 @@ const ensureThemeReadyInjectable = getInjectable({
       const applyStoredTheme = () => {
         const theme = (window as any).__lastReceivedTheme;
         if (theme) {
-          console.log('[THEME] Reapplying stored theme to ensure CSS variables persist', {
-            name: theme.name,
-            primary: theme.colors.primary,
-          });
           applyLensTheme(theme);
         }
       };
 
       // Apply theme when document is fully ready
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-          console.log('[THEME] Document ready, applying stored theme');
-          applyStoredTheme();
-        });
-      } else {
-        console.log('[THEME] Document already ready');
-        // Document is already ready, theme should be applied by listener
+        document.addEventListener('DOMContentLoaded', applyStoredTheme);
       }
 
       // Watch for potential CSS variable resets
-      // Some frameworks might clear styles, so we reapply after a delay
+      // Some frameworks might clear styles, so we reapply after delays
       setTimeout(() => {
         const primaryVar = getComputedStyle(document.documentElement)
           .getPropertyValue('--primary')
           .trim();
 
         if (!primaryVar && (window as any).__lastReceivedTheme) {
-          console.log('[THEME] CSS variables missing after 200ms, reapplying');
           applyStoredTheme();
         }
       }, 200);
@@ -68,7 +55,6 @@ const ensureThemeReadyInjectable = getInjectable({
           .trim();
 
         if (!primaryVar && (window as any).__lastReceivedTheme) {
-          console.log('[THEME] CSS variables missing after 500ms, reapplying');
           applyStoredTheme();
         }
       }, 500);
@@ -78,4 +64,3 @@ const ensureThemeReadyInjectable = getInjectable({
 });
 
 export default ensureThemeReadyInjectable;
-

@@ -10,5 +10,3 @@ import type { LensTheme } from "../../../../renderer/themes/lens-theme";
 export const activeThemeUpdateChannel: MessageChannel<LensTheme> = {
   id: "active-theme-update",
 };
-
-

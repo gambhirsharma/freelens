@@ -33,19 +33,12 @@ const setupApplyActiveThemeInjectable = getInjectable({
         reaction(
           () => activeTheme.get(),
           (theme) => {
-            console.log("[THEME DEBUG][setup-apply-active-theme] reaction (root)", {
-              name: theme.name,
-              type: theme.type,
-              primary: theme.colors.primary,
-            });
-
             currentTheme = theme;
 
             // Apply theme to root frame
             applyLensTheme(theme);
 
             // Broadcast theme to all cluster iframes via IPC
-            console.log("[THEME DEBUG][setup-apply-active-theme] broadcasting via IPC");
             broadcastMessage(activeThemeUpdateChannel.id, theme);
           },
           {
@@ -55,13 +48,7 @@ const setupApplyActiveThemeInjectable = getInjectable({
       } else {
         // Cluster frame: apply theme immediately on initialization
         // This ensures the theme is applied even if IPC messages are missed during startup
-        console.log("[THEME DEBUG][setup-apply-active-theme] cluster frame initializing, applying theme immediately");
         const theme = activeTheme.get();
-        console.log("[THEME DEBUG][setup-apply-active-theme] cluster frame initial theme", {
-          name: theme.name,
-          type: theme.type,
-          primary: theme.colors.primary,
-        });
 
         // Store for persistence layer
         currentTheme = theme;
@@ -75,12 +62,6 @@ const setupApplyActiveThemeInjectable = getInjectable({
         reaction(
           () => activeTheme.get(),
           (theme) => {
-            console.log("[THEME DEBUG][setup-apply-active-theme] cluster frame theme changed locally", {
-              name: theme.name,
-              type: theme.type,
-              primary: theme.colors.primary,
-            });
-
             currentTheme = theme;
             (window as any).__lastReceivedTheme = theme;
             applyLensTheme(theme);
@@ -98,25 +79,14 @@ const setupApplyActiveThemeInjectable = getInjectable({
             setTimeout(waitForLensViews, 50);
             return;
           }
-          
-          console.log("[THEME DEBUG][setup-apply-active-theme] setting up iframe observer");
-          
+
           const observer = new MutationObserver((mutations) => {
             for (const mutation of mutations) {
               for (const node of Array.from(mutation.addedNodes)) {
                 if (node instanceof HTMLIFrameElement && currentTheme) {
-                  console.log("[THEME DEBUG][setup-apply-active-theme] new iframe detected", {
-                    iframeId: node.id,
-                    src: (node as HTMLIFrameElement).src,
-                  });
-
                   // Broadcast theme via IPC when iframe loads
                   // (Can't access contentDocument due to cross-origin restrictions)
                   node.addEventListener("load", () => {
-                    console.log("[THEME DEBUG][setup-apply-active-theme] iframe load event fired", {
-                      iframeId: node.id,
-                    });
-
                     // Broadcast immediately
                     broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
 
@@ -124,23 +94,14 @@ const setupApplyActiveThemeInjectable = getInjectable({
                     // This handles race conditions where the iframe's DI container
                     // might not be fully initialized when the load event fires
                     setTimeout(() => {
-                      console.log("[THEME DEBUG][setup-apply-active-theme] re-broadcasting theme (50ms)", {
-                        iframeId: node.id,
-                      });
                       broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
                     }, 50);
 
                     setTimeout(() => {
-                      console.log("[THEME DEBUG][setup-apply-active-theme] re-broadcasting theme (150ms)", {
-                        iframeId: node.id,
-                      });
                       broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
                     }, 150);
 
                     setTimeout(() => {
-                      console.log("[THEME DEBUG][setup-apply-active-theme] re-broadcasting theme (300ms)", {
-                        iframeId: node.id,
-                      });
                       broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
                     }, 300);
                   }, { once: true });
@@ -150,26 +111,19 @@ const setupApplyActiveThemeInjectable = getInjectable({
           });
           
           observer.observe(lensViewsContainer, { childList: true, subtree: true });
-          console.log("[THEME DEBUG][setup-apply-active-theme] watching for new iframes in #lens-views");
 
           // Check for any existing iframes that may have already been added
           const existingIframes = lensViewsContainer.querySelectorAll('iframe');
           if (existingIframes.length > 0 && currentTheme) {
-            console.log("[THEME DEBUG][setup-apply-active-theme] found existing iframes, broadcasting theme", {
-              count: existingIframes.length,
-            });
-
             // Broadcast immediately for any existing iframes
             broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
 
             // Broadcast again with delays to ensure they receive it
             setTimeout(() => {
-              console.log("[THEME DEBUG][setup-apply-active-theme] re-broadcasting for existing iframes (50ms)");
               broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
             }, 50);
 
             setTimeout(() => {
-              console.log("[THEME DEBUG][setup-apply-active-theme] re-broadcasting for existing iframes (150ms)");
               broadcastMessage(activeThemeUpdateChannel.id, currentTheme);
             }, 150);
           }
