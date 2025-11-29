@@ -43,12 +43,23 @@ const activeThemeInjectable = getInjectable({
 
       const accentColor = customAccentColor.get();
 
+      // DEBUG: log base theme + preference + accent
+      console.log("[THEME DEBUG][activeTheme] base", {
+        pref,
+        baseThemeName: baseTheme.name,
+        baseThemeType: baseTheme.type,
+        basePrimary: baseTheme.colors.primary,
+        accentColor,
+      });
+
       if (!accentColor) {
+        console.log("[THEME DEBUG][activeTheme] no accentColor, returning baseTheme");
         return baseTheme;
       }
 
       // Override all colors that use the primary accent color
-      return {
+      // This ensures both root and iframe get the same theme with accent color applied
+      const effectiveTheme: LensTheme = {
         ...baseTheme,
         colors: {
           ...baseTheme.colors,
@@ -63,6 +74,14 @@ const activeThemeInjectable = getInjectable({
           sidebarActiveColor: "#ffffff",
         },
       };
+
+      console.log("[THEME DEBUG][activeTheme] effective", {
+        name: effectiveTheme.name,
+        type: effectiveTheme.type,
+        primary: effectiveTheme.colors.primary,
+      });
+
+      return effectiveTheme;
     });
   },
 });
