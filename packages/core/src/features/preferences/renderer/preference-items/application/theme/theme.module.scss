@@ -6,11 +6,6 @@
 
 @use "../../../../../../renderer/components/vars" as *;
 
-$accent-teal: #00a7a0;
-$accent-green: #4caf50;
-$accent-blue: #2196f3;
-$accent-orange: #ff9800;
-
 .selectRow {
   display: flex;
   gap: $unit;
@@ -61,5 +56,5 @@ $accent-orange: #ff9800;
 .colorOption {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: $unit;
 }
