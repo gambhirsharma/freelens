@@ -58,3 +58,213 @@
   align-items: center;
   gap: $unit;
 }
+
+/* ── Custom colors palette ── */
+
+.customColorsSection {
+  margin-top: calc($unit * 2);
+}
+
+.customColorsSectionLabel {
+  font-size: 12px;
+  color: var(--textColorSecondary);
+  margin-bottom: $unit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.customSwatchGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $unit;
+}
+
+.customSwatchItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--borderColor);
+  border-radius: $radius;
+  background-color: var(--secondaryBackground);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+  min-width: 60px;
+  max-width: 80px;
+
+  &:hover {
+    border-color: var(--primary);
+    background-color: var(--layoutTabsBackground);
+
+    .deleteSwatchBtn {
+      opacity: 1;
+    }
+  }
+}
+
+.customSwatchActive {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+.customSwatchColor {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.customSwatchLabel {
+  font-size: 11px;
+  color: var(--textColorSecondary);
+  text-align: center;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.deleteSwatchBtn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid var(--borderColor);
+  background-color: var(--layoutBackground);
+  color: var(--textColorSecondary);
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.15s, background-color 0.15s, color 0.15s;
+
+  &:hover {
+    background-color: var(--colorError, #e84e4e);
+    color: #fff;
+    border-color: var(--colorError, #e84e4e);
+  }
+}
+
+/* ── Add custom color form ── */
+
+.addColorSection {
+  margin-top: calc($unit * 2);
+}
+
+.addColorSectionLabel {
+  font-size: 12px;
+  color: var(--textColorSecondary);
+  margin-bottom: $unit;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.addColorForm {
+  display: flex;
+  align-items: center;
+  gap: $unit;
+  flex-wrap: wrap;
+}
+
+.hexInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--borderColor);
+  border-radius: $radius;
+  background-color: var(--inputBackground, var(--secondaryBackground));
+  padding: 0 8px;
+  transition: border-color 0.15s;
+
+  &:focus-within {
+    border-color: var(--primary);
+  }
+}
+
+.hexPreview {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  background-color: transparent;
+}
+
+.hexInput {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--textColorPrimary);
+  font-size: 13px;
+  width: 80px;
+  font-family: monospace;
+  padding: 6px 0;
+
+  &::placeholder {
+    color: var(--textColorTertiary, var(--textColorSecondary));
+    opacity: 0.6;
+  }
+}
+
+.nameInput {
+  flex: 1;
+  min-width: 140px;
+  padding: 6px 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: $radius;
+  background-color: var(--inputBackground, var(--secondaryBackground));
+  color: var(--textColorPrimary);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &::placeholder {
+    color: var(--textColorTertiary, var(--textColorSecondary));
+    opacity: 0.6;
+  }
+
+  &:focus {
+    border-color: var(--primary);
+  }
+}
+
+.addColorBtn {
+  padding: 6px 16px;
+  font-size: 13px;
+  border: 1px solid var(--primary);
+  border-radius: $radius;
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    opacity: 0.85;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.hexError {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--colorError, #e84e4e);
+}

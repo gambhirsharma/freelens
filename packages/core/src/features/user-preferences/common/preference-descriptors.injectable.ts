@@ -55,6 +55,10 @@ const userPreferenceDescriptorsInjectable = getInjectable({
         fromStore: (val) => val,
         toStore: (val) => val || undefined,
       }),
+      customColors: getPreferenceDescriptor<{ value: string; label: string }[] | undefined, { value: string; label: string }[]>({
+        fromStore: (val) => val ?? [],
+        toStore: (val) => (val && val.length > 0 ? val : undefined),
+      }),
       terminalTheme: getPreferenceDescriptor<string>({
         fromStore: (val) => val || "",
         toStore: (val) => val || undefined,
