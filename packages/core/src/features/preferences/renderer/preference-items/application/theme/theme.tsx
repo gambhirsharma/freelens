@@ -201,11 +201,7 @@ const NonInjectedTheme = observer(({ state, themes, defaultTheme }: Dependencies
             onChange={(e) => setNewColorName(e.target.value)}
             onKeyDown={handleAddKeyDown}
           />
-          <button
-            className={styles.addColorBtn}
-            onClick={handleAddCustomColor}
-            disabled={!newColorHex.trim()}
-          >
+          <button className={styles.addColorBtn} onClick={handleAddCustomColor} disabled={!newColorHex.trim()}>
             Add
           </button>
         </div>
