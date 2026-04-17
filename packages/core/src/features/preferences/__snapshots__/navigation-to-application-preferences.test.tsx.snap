@@ -290,10 +290,11 @@ exports[`preferences - navigation to application preferences given in preference
                             class="Select__single-value css-1dimb5e-singleValue"
                           >
                             <div
-                              style="display: flex; align-items: center; gap: 8px;"
+                              class="colorOption"
                             >
                               <div
-                                style="background-color: rgb(0, 167, 160); width: 20px; height: 20px; border-radius: 2px;"
+                                class="colorSwatch"
+                                style="background-color: rgb(0, 167, 160);"
                               />
                               <span>
                                 Teal
@@ -353,6 +354,46 @@ exports[`preferences - navigation to application preferences given in preference
                   <div
                     class="colorPreview"
                   />
+                  <div
+                    class="addColorSection"
+                  >
+                    <div
+                      class="addColorSectionLabel"
+                    >
+                      Add Custom Color
+                    </div>
+                    <div
+                      class="addColorForm"
+                    >
+                      <div
+                        class="hexInputWrapper"
+                      >
+                        <div
+                          class="hexPreview"
+                        />
+                        <input
+                          class="hexInput"
+                          maxlength="7"
+                          placeholder="#ff5733"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <input
+                        class="nameInput"
+                        placeholder="Color name (optional)"
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        class="addColorBtn"
+                        disabled=""
+                      >
+                        Add
+                      </button>
+                    </div>
+                    
+                  </div>
                 </section>
               </div>
               <div
@@ -1133,10 +1174,11 @@ exports[`preferences - navigation to application preferences given in preference
                             class="Select__single-value css-1dimb5e-singleValue"
                           >
                             <div
-                              style="display: flex; align-items: center; gap: 8px;"
+                              class="colorOption"
                             >
                               <div
-                                style="background-color: rgb(0, 167, 160); width: 20px; height: 20px; border-radius: 2px;"
+                                class="colorSwatch"
+                                style="background-color: rgb(0, 167, 160);"
                               />
                               <span>
                                 Teal
@@ -1196,6 +1238,46 @@ exports[`preferences - navigation to application preferences given in preference
                   <div
                     class="colorPreview"
                   />
+                  <div
+                    class="addColorSection"
+                  >
+                    <div
+                      class="addColorSectionLabel"
+                    >
+                      Add Custom Color
+                    </div>
+                    <div
+                      class="addColorForm"
+                    >
+                      <div
+                        class="hexInputWrapper"
+                      >
+                        <div
+                          class="hexPreview"
+                        />
+                        <input
+                          class="hexInput"
+                          maxlength="7"
+                          placeholder="#ff5733"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <input
+                        class="nameInput"
+                        placeholder="Color name (optional)"
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        class="addColorBtn"
+                        disabled=""
+                      >
+                        Add
+                      </button>
+                    </div>
+                    
+                  </div>
                 </section>
               </div>
               <div
@@ -2414,10 +2496,11 @@ exports[`preferences - navigation to application preferences given in some child
                             class="Select__single-value css-1dimb5e-singleValue"
                           >
                             <div
-                              style="display: flex; align-items: center; gap: 8px;"
+                              class="colorOption"
                             >
                               <div
-                                style="background-color: rgb(0, 167, 160); width: 20px; height: 20px; border-radius: 2px;"
+                                class="colorSwatch"
+                                style="background-color: rgb(0, 167, 160);"
                               />
                               <span>
                                 Teal
@@ -2477,6 +2560,46 @@ exports[`preferences - navigation to application preferences given in some child
                   <div
                     class="colorPreview"
                   />
+                  <div
+                    class="addColorSection"
+                  >
+                    <div
+                      class="addColorSectionLabel"
+                    >
+                      Add Custom Color
+                    </div>
+                    <div
+                      class="addColorForm"
+                    >
+                      <div
+                        class="hexInputWrapper"
+                      >
+                        <div
+                          class="hexPreview"
+                        />
+                        <input
+                          class="hexInput"
+                          maxlength="7"
+                          placeholder="#ff5733"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <input
+                        class="nameInput"
+                        placeholder="Color name (optional)"
+                        type="text"
+                        value=""
+                      />
+                      <button
+                        class="addColorBtn"
+                        disabled=""
+                      >
+                        Add
+                      </button>
+                    </div>
+                    
+                  </div>
                 </section>
               </div>
               <div
@@ -3258,10 +3381,11 @@ exports[`preferences - navigation to application preferences given in some child
                               class="Select__single-value css-1dimb5e-singleValue"
                             >
                               <div
-                                style="display: flex; align-items: center; gap: 8px;"
+                                class="colorOption"
                               >
                                 <div
-                                  style="background-color: rgb(0, 167, 160); width: 20px; height: 20px; border-radius: 2px;"
+                                  class="colorSwatch"
+                                  style="background-color: rgb(0, 167, 160);"
                                 />
                                 <span>
                                   Teal
@@ -3321,6 +3445,46 @@ exports[`preferences - navigation to application preferences given in some child
                     <div
                       class="colorPreview"
                     />
+                    <div
+                      class="addColorSection"
+                    >
+                      <div
+                        class="addColorSectionLabel"
+                      >
+                        Add Custom Color
+                      </div>
+                      <div
+                        class="addColorForm"
+                      >
+                        <div
+                          class="hexInputWrapper"
+                        >
+                          <div
+                            class="hexPreview"
+                          />
+                          <input
+                            class="hexInput"
+                            maxlength="7"
+                            placeholder="#ff5733"
+                            type="text"
+                            value=""
+                          />
+                        </div>
+                        <input
+                          class="nameInput"
+                          placeholder="Color name (optional)"
+                          type="text"
+                          value=""
+                        />
+                        <button
+                          class="addColorBtn"
+                          disabled=""
+                        >
+                          Add
+                        </button>
+                      </div>
+                      
+                    </div>
                   </section>
                 </div>
                 <div
