@@ -11,12 +11,10 @@ import lensColorThemePreferenceInjectable from "../../features/user-preferences/
 import { lensThemeDeclarationInjectionToken } from "./declaration";
 import defaultLensThemeInjectable from "./default-theme.injectable";
 import systemThemeConfigurationInjectable from "./system-theme.injectable";
+import { DEFAULT_ACCENT_COLOR } from "./accent-colors";
 import lensThemesInjectable from "./themes.injectable";
 
 import type { LensColorName, LensTheme } from "./lens-theme";
-
-/** The default accent color used by built-in themes. */
-const DEFAULT_ACCENT_COLOR = "#00a7a0";
 
 /**
  * Color keys that represent the accent color across built-in themes.

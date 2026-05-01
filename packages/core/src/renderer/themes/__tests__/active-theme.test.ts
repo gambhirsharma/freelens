@@ -10,14 +10,13 @@ import lensColorThemePreferenceInjectable from "../../../features/user-preferenc
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
 import activeThemeInjectable from "../active.injectable";
 import defaultLensThemeInjectable from "../default-theme.injectable";
+import { DEFAULT_ACCENT_COLOR } from "../accent-colors";
 import systemThemeConfigurationInjectable from "../system-theme.injectable";
 
 import type { DiContainer } from "@ogre-tools/injectable";
 import type { IComputedValue } from "mobx";
 
 import type { LensTheme } from "../lens-theme";
-
-const DEFAULT_ACCENT_COLOR = "#00a7a0";
 
 const createMockTheme = (overrides: Partial<LensTheme> = {}): LensTheme => ({
   name: "Test Theme",
