@@ -8,9 +8,9 @@ import { computed } from "mobx";
 import customAccentColorInjectable from "../../../features/user-preferences/common/custom-accent-color.injectable";
 import lensColorThemePreferenceInjectable from "../../../features/user-preferences/common/lens-color-theme.injectable";
 import { getDiForUnitTesting } from "../../getDiForUnitTesting";
+import { DEFAULT_ACCENT_COLOR } from "../accent-colors";
 import activeThemeInjectable from "../active.injectable";
 import defaultLensThemeInjectable from "../default-theme.injectable";
-import { DEFAULT_ACCENT_COLOR } from "../accent-colors";
 import systemThemeConfigurationInjectable from "../system-theme.injectable";
 
 import type { DiContainer } from "@ogre-tools/injectable";
