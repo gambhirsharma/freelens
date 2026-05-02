@@ -146,7 +146,7 @@ describe("active theme with custom accent color", () => {
   let mockCustomAccentColor: string | undefined;
   let mockSystemThemeType: "dark" | "light";
   let mockColorThemePreference: { useSystemTheme: boolean; lensThemeId: string };
-  let mockDarkTheme: LensTheme;
+  let mockBaseTheme: LensTheme;
 
   beforeEach(() => {
     di = getDiForUnitTesting();
@@ -154,11 +154,11 @@ describe("active theme with custom accent color", () => {
     mockCustomAccentColor = undefined;
     mockSystemThemeType = "dark";
     mockColorThemePreference = { useSystemTheme: false, lensThemeId: "lens-dark" };
-    mockDarkTheme = createMockTheme({ name: "Dark", type: "dark" });
+    mockBaseTheme = createMockTheme({ name: "Dark", type: "dark" });
 
     di.override(customAccentColorInjectable, () => computed(() => mockCustomAccentColor));
     di.override(lensColorThemePreferenceInjectable, () => computed(() => mockColorThemePreference));
-    di.override(defaultLensThemeInjectable, () => mockDarkTheme);
+    di.override(defaultLensThemeInjectable, () => mockBaseTheme);
     di.override(systemThemeConfigurationInjectable, () => computed(() => mockSystemThemeType));
   });
 
@@ -211,8 +211,8 @@ describe("active theme with custom accent color", () => {
     });
 
     it("sets sidebar active color to dark for light themes", () => {
-      mockDarkTheme = createMockTheme({ name: "Light", type: "light" });
-      di.override(defaultLensThemeInjectable, () => mockDarkTheme);
+      mockBaseTheme = createMockTheme({ name: "Light", type: "light" });
+      di.override(defaultLensThemeInjectable, () => mockBaseTheme);
       activeTheme = di.inject(activeThemeInjectable);
 
       const theme = activeTheme.get();
@@ -233,14 +233,14 @@ describe("active theme with custom accent color", () => {
   describe("when theme colors do not use default accent", () => {
     beforeEach(() => {
       mockCustomAccentColor = "#ff0000";
-      mockDarkTheme = createMockTheme({
+      mockBaseTheme = createMockTheme({
         colors: {
           ...createMockTheme().colors,
           blue: "#custom-blue",
           primary: "#custom-primary",
         },
       });
-      di.override(defaultLensThemeInjectable, () => mockDarkTheme);
+      di.override(defaultLensThemeInjectable, () => mockBaseTheme);
       activeTheme = di.inject(activeThemeInjectable);
     });
 
