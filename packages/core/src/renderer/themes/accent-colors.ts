@@ -51,7 +51,6 @@ export interface AccentColorOption {
   label: string;
 }
 
-/** The default accent color used by built-in themes. */
 export const DEFAULT_ACCENT_COLOR = "#00a7a0";
 
 export const accentColorOptions: AccentColorOption[] = [

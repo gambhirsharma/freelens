@@ -61,8 +61,6 @@ const activeThemeInjectable = getInjectable({
         return baseTheme;
       }
 
-      // Build theme-aware overrides: only replace known accent keys, and
-      // only when the base theme actually uses the default accent for them.
       const colorOverrides: Partial<Record<LensColorName, string>> = {};
 
       for (const key of ACCENT_COLOR_KEYS) {
