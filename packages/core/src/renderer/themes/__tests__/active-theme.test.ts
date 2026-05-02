@@ -252,6 +252,35 @@ describe("active theme with custom accent color", () => {
     });
   });
 
+  describe("when a third-party theme uses no default accent keys", () => {
+    const customSidebarActiveColor = "#abcdef";
+
+    beforeEach(() => {
+      mockCustomAccentColor = "#ff0000";
+      mockBaseTheme = createMockTheme({
+        colors: {
+          ...createMockTheme().colors,
+          blue: "#custom-blue",
+          primary: "#custom-primary",
+          buttonPrimaryBackground: "#custom-btn",
+          menuActiveBackground: "#custom-menu",
+          helmStableRepo: "#custom-helm",
+          colorInfo: "#custom-info",
+          sidebarSubmenuActiveColor: "#custom-submenu",
+          sidebarActiveColor: customSidebarActiveColor,
+        },
+      });
+      di.override(defaultLensThemeInjectable, () => mockBaseTheme);
+      activeTheme = di.inject(activeThemeInjectable);
+    });
+
+    it("does not override sidebarActiveColor when no accent keys matched", () => {
+      const theme = activeTheme.get();
+
+      expect(theme.colors.sidebarActiveColor).toBe(customSidebarActiveColor);
+    });
+  });
+
   describe("with system theme preference", () => {
     beforeEach(() => {
       mockColorThemePreference = { useSystemTheme: true, lensThemeId: "" };

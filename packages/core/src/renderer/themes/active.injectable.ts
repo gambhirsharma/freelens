@@ -69,8 +69,11 @@ const activeThemeInjectable = getInjectable({
         }
       }
 
-      // Ensure sidebar active text contrasts with the accent background
-      colorOverrides.sidebarActiveColor = baseTheme.type === "dark" ? "#ffffff" : "#1e2124";
+      // Only adjust sidebar active text contrast when the accent background was actually changed.
+      // Skipping this for themes that don't use the default accent preserves their custom sidebarActiveColor.
+      if (Object.keys(colorOverrides).length > 0) {
+        colorOverrides.sidebarActiveColor = baseTheme.type === "dark" ? "#ffffff" : "#1e2124";
+      }
 
       return {
         ...baseTheme,
